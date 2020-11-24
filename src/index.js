@@ -11,6 +11,7 @@ const inputRef = document.querySelector('.search-form input');
 const galleryRef = document.querySelector('.gallery');
 const searchBtnRef = document.querySelector('.search-btn');
 const clearBtnRef = document.querySelector('.clear-btn');
+const clearMoreBtnRef = document.querySelector('.clear-more-btn');
 const loadMoreBtnRef = document.querySelector('.load-more-btn');
 const loaderRef = document.querySelector('.lds-roller');
 
@@ -18,6 +19,7 @@ formRef.addEventListener('submit', onSubmit);
 searchBtnRef.addEventListener('click', onSubmit);
 loadMoreBtnRef.addEventListener('click', onSubmit);
 clearBtnRef.addEventListener('click', handleCleanup);
+clearMoreBtnRef.addEventListener('click', handleCleanup);
 galleryRef.addEventListener('click', openModal);
 
 let queryString = '';
@@ -26,6 +28,7 @@ function handleCleanup() {
   galleryRef.innerHTML = '';
   inputRef.value = '';
   loadMoreBtnRef.classList.add('is-hidden');
+  clearMoreBtnRef.classList.add('is-hidden');
 }
 
 const options = {
@@ -59,6 +62,7 @@ function showLoadMoreBtn() {
   loaderRef.classList.remove('show');
   if (options.page !== 1) {
     loadMoreBtnRef.classList.remove('is-hidden');
+    clearMoreBtnRef.classList.remove('is-hidden');
   }
   const scrollHeight = Math.max(
     document.body.scrollHeight,

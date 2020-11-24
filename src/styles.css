@@ -89,14 +89,14 @@ body {
 }
 
 .btns-bar button {
-  display: inline-block;
+  display: block;
 }
 
 .btns-bar .load-more-btn {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.is-hidden {
+.btns-bar .is-hidden {
   display: none;
 }
 

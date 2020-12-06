@@ -34,6 +34,7 @@ function handleCleanup() {
 const options = {
   page: 1,
   key: '19199017-0109ef76b5c2e4dd98ebacd3c',
+  perpage: null,
 };
 
 function onSubmit(event) {
@@ -54,16 +55,18 @@ function onSubmit(event) {
   };
 
   options.page += 1;
+  options.perpage = amountRow;
 
-  getImages(searchOptions).then(showImages).then(showLoadMoreBtn);
+  getImages(searchOptions).then(showImages);
 }
 
 function showLoadMoreBtn() {
   loaderRef.classList.remove('show');
-  if (options.page !== 1) {
-    loadMoreBtnRef.classList.remove('is-hidden');
-    clearMoreBtnRef.classList.remove('is-hidden');
+  if (options.page === 1) {
+    return;
   }
+  loadMoreBtnRef.classList.remove('is-hidden');
+  clearMoreBtnRef.classList.remove('is-hidden');
   const scrollHeight = Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight,
@@ -78,10 +81,16 @@ function showLoadMoreBtn() {
   });
 }
 
+function hideLoadMoreBtn() {
+  loadMoreBtnRef.classList.add('is-hidden');
+  loaderRef.classList.remove('show');
+}
+
 function showImages(response) {
   const images = response.data.hits;
   const markup = imagesTemplateHbs(images);
   galleryRef.insertAdjacentHTML('beforeend', markup);
+  images.length < options.perpage ? hideLoadMoreBtn() : showLoadMoreBtn();
 }
 
 function openModal(event) {

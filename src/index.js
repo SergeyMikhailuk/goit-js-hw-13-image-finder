@@ -67,6 +67,10 @@ function showLoadMoreBtn() {
   }
   loadMoreBtnRef.classList.remove('is-hidden');
   clearMoreBtnRef.classList.remove('is-hidden');
+  scrollDown();
+}
+
+function scrollDown() {
   const scrollHeight = Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight,
@@ -84,6 +88,7 @@ function showLoadMoreBtn() {
 function hideLoadMoreBtn() {
   loadMoreBtnRef.classList.add('is-hidden');
   loaderRef.classList.remove('show');
+  scrollDown();
 }
 
 function showImages(response) {
